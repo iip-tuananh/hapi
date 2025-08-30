@@ -1,0 +1,31 @@
+import AosModule from "./AosModule.js";
+import TabModule from "./TabModule.js";
+import MenuModule from "./MenuModule.js";
+import FaqsModule from "./FaqsModule.js";
+import AsideModule from "./AsideModule.js";
+import PopupModule from "./PopupModule.js";
+import SplideModule from "./SplideModule.js";
+import SearchModule from "./SearchModule.js";
+import SwiperModule from "./SwiperModule.js";
+import GalleryModule from "./GalleryModule.js";
+import CountUpModule from "./CountUpModule.js";
+import MagnificModule from "./MagnificModule.js";
+import ScrollTopModule from "./ScrollTopModule.js";
+import MatchHeightModule from "./MatchHeightModule.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+  AosModule();
+  TabModule();
+  MenuModule();
+  FaqsModule();
+  AsideModule();
+  PopupModule();
+  SplideModule();
+  SearchModule();
+  SwiperModule();
+  GalleryModule();
+  CountUpModule();
+  MagnificModule();
+  ScrollTopModule();
+  MatchHeightModule();
+});
