@@ -117,7 +117,7 @@ class AboutUsController extends Controller
             if ($request->home_image) {
 
                 if ($object->home_image) {
-                    FileHelper::deleteFileFromCloudflare($object->home_image->id, $object->id, ThisModel::class, 'home_image');
+                    FileHelper::deleteFileFromCloudflare($object->home_image, $object->id, ThisModel::class, 'home_image');
                 }
 
                 FileHelper::uploadFileToCloudflare($request->home_image, $object->id, ThisModel::class, 'home_image');
@@ -126,7 +126,7 @@ class AboutUsController extends Controller
             if ($request->image) {
 
                 if ($object->image) {
-                    FileHelper::deleteFileFromCloudflare($object->image->id, $object->id, ThisModel::class, 'image');
+                    FileHelper::deleteFileFromCloudflare($object->image, $object->id, ThisModel::class, 'image');
                 }
 
                 FileHelper::uploadFileToCloudflare($request->image, $object->id, ThisModel::class, 'image');
@@ -134,34 +134,34 @@ class AboutUsController extends Controller
 
             if ($request->image_mission) {
                 if ($object->image_mission) {
-                    FileHelper::deleteFileFromCloudflare($object->image_mission->id, $object->id, ThisModel::class, 'image_mission');
+                    FileHelper::deleteFileFromCloudflare($object->image_mission, $object->id, ThisModel::class, 'image_mission');
                 }
                 FileHelper::uploadFileToCloudflare($request->image_mission, $object->id, ThisModel::class, 'image_mission');
             }
 
             if ($request->image_vision) {
                 if ($object->image_vision) {
-                    FileHelper::deleteFileFromCloudflare($object->image_vision->id, $object->id, ThisModel::class, 'image_vision');
+                    FileHelper::deleteFileFromCloudflare($object->image_vision, $object->id, ThisModel::class, 'image_vision');
                 }
                 FileHelper::uploadFileToCloudflare($request->image_vision, $object->id, ThisModel::class, 'image_vision');
             }
 
             if ($request->image_core_values) {
                 if ($object->image_core_values) {
-                    FileHelper::deleteFileFromCloudflare($object->image_core_values->id, $object->id, ThisModel::class, 'image_core_values');
+                    FileHelper::deleteFileFromCloudflare($object->image_core_values, $object->id, ThisModel::class, 'image_core_values');
                 }
                 FileHelper::uploadFileToCloudflare($request->image_core_values, $object->id, ThisModel::class, 'image_core_values');
             }
 
             if ($request->image_raw_material_area) {
                 if ($object->image_raw_material_area) {
-                    FileHelper::deleteFileFromCloudflare($object->image_raw_material_area->id, $object->id, ThisModel::class, 'image_raw_material_area');
+                    FileHelper::deleteFileFromCloudflare($object->image_raw_material_area, $object->id, ThisModel::class, 'image_raw_material_area');
                 }
                 FileHelper::uploadFileToCloudflare($request->image_raw_material_area, $object->id, ThisModel::class, 'image_raw_material_area');
             }
 
             if ($request->galleries) {
-                $object->syncGalleries($request->galleries);
+                $object->syncGalleries($request->galleries); 
             }
 
             // DB::commit();

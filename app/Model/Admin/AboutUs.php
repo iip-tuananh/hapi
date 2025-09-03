@@ -100,7 +100,7 @@ class AboutUs extends Model
             $deleted = AboutUsGallery::where('about_us_id', $this->id)->whereNotIn('id', $exist_ids)->get();
             foreach ($deleted as $item) {
                 if ($item->image) {
-                    FileHelper::forceDeleteFiles($item->image->id, $item->id, AboutUsGallery::class, null);
+                    FileHelper::deleteFileFromCloudflare($item->image, $item->id, AboutUsGallery::class, null);
                     $item->image->removeFromDB();
                 }
                 $item->removeFromDB();
@@ -117,16 +117,19 @@ class AboutUs extends Model
                 $gallery->save();
 
                 if (isset($g['image'])) {
-                    if ($gallery->image) $gallery->image->removeFromDB();
+                    if ($gallery->image) {
+                        FileHelper::deleteFileFromCloudflare($gallery->image, $gallery->id, AboutUsGallery::class, null);
+                        $gallery->image->removeFromDB();
+                    }
                     $file = $g['image'];
-                    FileHelper::uploadFileToCloudflare($file, $gallery->id, AboutUsGallery::class, null, 99);
+                    FileHelper::uploadFileToCloudflare($file, $gallery->id, AboutUsGallery::class, null);
                 }
             }
         } else {
             $galleries = $this->galleries;
             foreach ($galleries as $gallery) {
                 if ($gallery->image) {
-                    FileHelper::deleteFileFromCloudflare($gallery->image->id, $gallery->id, AboutUsGallery::class, null);
+                    FileHelper::deleteFileFromCloudflare($gallery->image, $gallery->id, AboutUsGallery::class, null);
                     $gallery->image->removeFromDB();
                 }
             }

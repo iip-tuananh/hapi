@@ -151,12 +151,12 @@
                 class="attachment-full size-full" alt="{{$config->web_title}}" title="{{$config->web_title}}" decoding="async"
                 loading="lazy" /> </a>
     </div>
-    <div class="move-top-social">
+    {{-- <div class="move-top-social">
         <a href="https://zalo.me/{{$config->zalo}}">
             <img src="/site/images/icon-chat.svg"
                 class="attachment-full size-full" alt="{{$config->web_title}}" title="{{$config->web_title}}" decoding="async"
                 loading="lazy" /> </a>
-    </div>
+    </div> --}}
     <div class="progress-wrap">
         <svg class="progress-circle" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
             viewbox="0 0 32 32" fill="none">
