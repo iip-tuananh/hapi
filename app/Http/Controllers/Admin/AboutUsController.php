@@ -99,8 +99,8 @@ class AboutUsController extends Controller
             return Response::json($json);
         }
 
-        DB::beginTransaction();
-        try {
+        // DB::beginTransaction();
+        // try {
             $object = ThisModel::findOrFail($id);
             $object->name = $request->name;
             $object->home_title = $request->home_title;
@@ -164,15 +164,15 @@ class AboutUsController extends Controller
                 $object->syncGalleries($request->galleries);
             }
 
-            DB::commit();
+            // DB::commit();
             $json->success = true;
             $json->message = "Thao tác thành công!";
             $json->data = $object;
             return Response::json($json);
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw new Exception($e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        //     throw new Exception($e->getMessage());
+        // }
     }
 
     public function delete($id)
