@@ -15,6 +15,12 @@
         </a>
     </li>
     <li class="nav-item" ng-class="{'error': errors.youtube_link || errors.description || errors.content || errors.image}">
+        <a class="nav-link" id="about-us-why-choose-tab" data-toggle="tab" href="#about-us-why-choose" role="tab"
+            aria-controls="about-us-why-choose" aria-selected="true">
+            Vì sao chọn (trang chủ)
+        </a>
+    </li>
+    <li class="nav-item" ng-class="{'error': errors.youtube_link || errors.description || errors.content || errors.image}">
         <a class="nav-link" id="about-us-tab" data-toggle="tab" href="#about-us" role="tab"
             aria-controls="about-us" aria-selected="true">
             Trang chi tiết
@@ -83,6 +89,100 @@
                     </span>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="tab-pane fade p-3" id="about-us-why-choose" role="tabpanel" aria-labelledby="about-us-why-choose-tab">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <div class="form-group custom-group">
+                    <label class="form-label required-label">Tiêu đề</label>
+                    <input class="form-control" ng-model="form.home_why_choose_title" type="text">
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong><% errors.home_why_choose_title[0] %></strong>
+                    </span>
+                </div>
+                <div class="form-group custom-group">
+                    <label class="form-label required-label">Nội dung ngắn gọn</label>
+                    <textarea class="form-control ck-editor" ck-editor ng-model="form.home_why_choose_description" rows="3"></textarea>
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong><% errors.home_why_choose_description[0] %></strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="form-group text-center mb-4">
+                    <label class="form-label required-label">Ảnh giới thiệu chung</label>
+                    <div class="main-img-preview">
+                        <p class="help-block-img">* Ảnh định dạng: jpg, png không quá 1MB.</p>
+                        <img class="thumbnail img-preview" ng-src="<% form.home_why_choose_image.path %>">
+                    </div>
+                    <div class="input-group" style="width: 100%; text-align: center">
+                        <div class="input-group-btn" style="margin: 0 auto">
+                            <div class="fileUpload fake-shadow cursor-pointer">
+                                <label class="mb-0" for="<% form.home_why_choose_image.element_id %>">
+                                    <i class="glyphicon glyphicon-upload"></i> Chọn ảnh
+                                </label>
+                                <input class="d-none" id="<% form.home_why_choose_image.element_id %>" type="file"
+                                    class="attachment_upload" accept=".jpg,.jpeg,.png">
+                            </div>
+                        </div>
+                    </div>
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong><% errors.home_why_choose_image[0] %></strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info btn-sm float-left mb-3" ng-click="form.addWhyChooseCriteria()">
+                    <i class="fa fa-plus"></i> Thêm tiêu chí
+                </button>
+            </div>
+        </div>
+        <div class="row mb-4" ng-repeat="(index, c) in form.why_choose_criterias">
+            <div class="col-md-4 col-xs-12">
+                <div class="form-group text-center mb-4">
+                    <label class="form-label required-label">Ảnh tiêu chí</label>
+                    <div class="main-img-preview">
+                        <p class="help-block-img">* Ảnh định dạng: jpg, png không quá 1MB.</p>
+                        <img class="thumbnail img-preview" ng-src="<% c.image.path %>">
+                    </div>
+                    <div class="input-group" style="width: 100%; text-align: center">
+                        <div class="input-group-btn" style="margin: 0 auto">
+                            <div class="fileUpload fake-shadow cursor-pointer">
+                                <label class="mb-0" for="<% c.image.element_id %>">
+                                    <i class="glyphicon glyphicon-upload"></i> Chọn ảnh
+                                </label>
+                                <input class="d-none" id="<% c.image.element_id %>" type="file"
+                                    class="attachment_upload" accept=".jpg,.jpeg,.png">
+                            </div>
+                        </div>
+                    </div>
+                    <span class="invalid-feedback d-block" role="alert">
+                        <strong><% errors['why_choose_criterias.' + index + '.image'][0] %></strong>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <input type="text" class="form-control" ng-model="c.title" placeholder="Tiêu đề <% index + 1 %>" style="display: inline-block; width: calc(100% - 70px);">
+                <button style="width: 70px; height: calc(2.25rem + 2px) !important"  class="btn btn-danger btn-sm float-right" ng-click="form.removeWhyChooseCriteria(index)">
+                    <i class="fa fa-times"></i> Xóa
+                </button>
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong><% errors['why_choose_criterias.' + index + '.title'][0] %></strong>
+                </span>
+
+                <textarea class="form-control ck-editor" ck-editor rows="5" ng-model="c.content"
+                    placeholder="Nội dung ảnh tiêu chí <% index + 1 %>"></textarea>
+                <span class="invalid-feedback d-block" role="alert">
+                    <strong>
+                        <% errors['why_choose_criterias.' + index + '.content'][0] %>
+                    </strong>
+                </span>
+            </div>
+
         </div>
     </div>
     <div class="tab-pane fade p-3" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">

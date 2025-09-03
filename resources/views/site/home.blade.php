@@ -225,127 +225,50 @@
                 <div class="m-ready-col col col-5">
                     <div class="m-ready-inner flex flex-40">
                         <div class="m-ready-heading flex flex-16">
-                            <h2 class="title-40 f-tt cl-pri">Tại sao <br />
-                                lựa chọn chúng tôi
+                            <h2 class="title-40 f-tt cl-pri">{{$about_us->home_why_choose_title}}
                             </h2>
-                            <p class="text-16">{{$config->web_title}} luôn hiện diện bên bạn hằng ngày từ <br />
-                                những điều nhỏ nhất, dù bất cứ nơi đâu
-                            </p>
+                            <div class="text-16">{!!$about_us->home_why_choose_description!!}
+                            </div>
                         </div>
                         <div class="img">
                             <img width="1024" height="917"
-                                src="https://fudovietnam.com/wp-content/uploads/2025/06/m-ready1.png"
+                                src="{{$about_us->home_why_choose_image ? $about_us->home_why_choose_image->path : 'https://placehold.co/1024x917'}}"
                                 class="attachment-full size-full" alt="{{$config->web_title}}" title="{{$config->web_title}}"
                                 decoding="async"
-                                srcset="https://fudovietnam.com/wp-content/uploads/2025/06/m-ready1.png 1024w, https://fudovietnam.com/wp-content/uploads/2025/06/m-ready1-300x269.png 300w, https://fudovietnam.com/wp-content/uploads/2025/06/m-ready1-768x688.png 768w" />
+                                srcset="{{$about_us->home_why_choose_image ? $about_us->home_why_choose_image->path : 'https://placehold.co/1024x917'}} 1024w, {{($about_us->home_why_choose_image ? $about_us->home_why_choose_image->path : 'https://placehold.co/300x269')}} 300w, {{($about_us->home_why_choose_image ? $about_us->home_why_choose_image->path : 'https://placehold.co/768x688')}} 768w" />
                         </div>
                     </div>
                 </div>
                 <div class="m-ready-col col col-7">
                     <ul class="m-ready-list flex flex-24">
+                        @foreach ($about_us->why_choose_criterias as $criteria)
                         <li class="m-ready-item">
                             <div class="m-ready-box">
                                 <div class="m-ready-content flex flex-12">
                                     <div class="box">
                                         <div class="box-img">
                                             <img width="24" height="24"
-                                                src="https://fudovietnam.com/wp-content/uploads/2025/06/fi_4334487.png"
+                                                src="/site/images/fi_13462501white.png"
                                                 class="attachment-full size-full" alt="igotour" title="igotour"
                                                 decoding="async" />
                                         </div>
                                         <p class="title-24 f-tt cl-sec">
-                                            Tiện lợi
+                                            {{$criteria->title}}
                                         </p>
                                     </div>
-                                    <p class="text-14">Gói nhỏ bỏ túi dễ dàng vừa vặn trong túi xách,<br />
-                                        đồng hành cùng bạn suốt ngày dài
-                                    </p>
+                                    <p class="text-14">{!!$criteria->content!!}</p>
                                 </div>
                                 <div class="m-ready-img">
                                     <div class="img img1">
                                         <img width="280" height="160"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/Rectangle-2697.png"
+                                            src="{{$criteria->image ? $criteria->image->path : 'https://placehold.co/280x160'}}"
                                             class="attachment-full size-full" alt="{{$config->web_title}}"
                                             title="{{$config->web_title}}" decoding="async" />
-                                    </div>
-                                    <div class="img img2">
-                                        <img width="2484" height="2610"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/Pocket.png"
-                                            class="attachment-full size-full wp-post-image" alt="{{$config->web_title}}"
-                                            title="{{$config->web_title}}" decoding="async"
-                                            srcset="https://fudovietnam.com/wp-content/uploads/2025/06/Pocket.png 2484w, https://fudovietnam.com/wp-content/uploads/2025/06/Pocket-286x300.png 286w, https://fudovietnam.com/wp-content/uploads/2025/06/Pocket-975x1024.png 975w, https://fudovietnam.com/wp-content/uploads/2025/06/Pocket-768x807.png 768w, https://fudovietnam.com/wp-content/uploads/2025/06/Pocket-1462x1536.png 1462w, https://fudovietnam.com/wp-content/uploads/2025/06/Pocket-1949x2048.png 1949w" />
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="m-ready-item">
-                            <div class="m-ready-box">
-                                <div class="m-ready-content flex flex-12">
-                                    <div class="box">
-                                        <div class="box-img">
-                                            <img width="24" height="24"
-                                                src="https://fudovietnam.com/wp-content/uploads/2025/06/Group.png"
-                                                class="attachment-full size-full" alt="igotour" title="igotour"
-                                                decoding="async" />
-                                        </div>
-                                        <p class="title-24 f-tt cl-sec">
-                                            Tiết kiệm
-                                        </p>
-                                    </div>
-                                    <p class="text-14">Cuộn dài – Tiết kiệm – Mượt mà. Dùng trong nhà tắm, bếp hay
-                                        nơi công cộng, sạch từ chạm đầu tiên.</p>
-                                </div>
-                                <div class="m-ready-img">
-                                    <div class="img img1">
-                                        <img width="280" height="160"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/Rectangle-2696.png"
-                                            class="attachment-full size-full" alt="{{$config->web_title}}"
-                                            title="{{$config->web_title}}" decoding="async" />
-                                    </div>
-                                    <div class="img img2">
-                                        <img width="2484" height="2610"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/Rolls.png"
-                                            class="attachment-full size-full wp-post-image" alt="{{$config->web_title}}"
-                                            title="{{$config->web_title}}" decoding="async"
-                                            srcset="https://fudovietnam.com/wp-content/uploads/2025/06/Rolls.png 2484w, https://fudovietnam.com/wp-content/uploads/2025/06/Rolls-286x300.png 286w, https://fudovietnam.com/wp-content/uploads/2025/06/Rolls-975x1024.png 975w, https://fudovietnam.com/wp-content/uploads/2025/06/Rolls-768x807.png 768w, https://fudovietnam.com/wp-content/uploads/2025/06/Rolls-1462x1536.png 1462w, https://fudovietnam.com/wp-content/uploads/2025/06/Rolls-1949x2048.png 1949w" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="m-ready-item">
-                            <div class="m-ready-box">
-                                <div class="m-ready-content flex flex-12">
-                                    <div class="box">
-                                        <div class="box-img">
-                                            <img width="24" height="24"
-                                                src="https://fudovietnam.com/wp-content/uploads/2025/06/fi_13462501white.png"
-                                                class="attachment-full size-full" alt="igotour" title="igotour"
-                                                decoding="async" />
-                                        </div>
-                                        <p class="title-24 f-tt cl-sec">
-                                            Tinh tế - Lịch sự
-                                        </p>
-                                    </div>
-                                    <p class="text-14">Lịch sự – Sang trọng – Tinh tế. Phù hợp đặt bàn ăn, phòng
-                                        khách, ô tô hay văn phòng tiếp khách.</p>
-                                </div>
-                                <div class="m-ready-img">
-                                    <div class="img img1">
-                                        <img width="280" height="160"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/Rectangle-2699.png"
-                                            class="attachment-full size-full" alt="{{$config->web_title}}"
-                                            title="{{$config->web_title}}" decoding="async" />
-                                    </div>
-                                    <div class="img img2">
-                                        <img width="967" height="1024"
-                                            src="https://fudovietnam.com/wp-content/uploads/2025/06/fudo-box-4.png"
-                                            class="attachment-full size-full wp-post-image" alt="{{$config->web_title}}"
-                                            title="{{$config->web_title}}" decoding="async"
-                                            srcset="https://fudovietnam.com/wp-content/uploads/2025/06/fudo-box-4.png 967w, https://fudovietnam.com/wp-content/uploads/2025/06/fudo-box-4-283x300.png 283w, https://fudovietnam.com/wp-content/uploads/2025/06/fudo-box-4-768x813.png 768w" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

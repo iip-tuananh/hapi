@@ -194,7 +194,7 @@
                                         loading="lazy">
                                 </div>
                                 <h2 class="title-40 cl-pri f-tt">
-                                    Vì sao Fudo chọn làm<br />
+                                    Vì sao {{$config->web_title}} chọn làm<br />
                                     khăn giấy từ tre?
                                 </h2>
                                 <div class="text-16">
@@ -216,7 +216,7 @@
                     <div class="value-position">
                         <div class="value-content flex flex-24">
                             <h2 class="title-56 f-tt cl-white">
-                                Fudo khát khao mang giá trị của <br />
+                                {{$config->web_title}} khát khao mang giá trị của <br />
                                 tre chăm chút vào từng sản phẩm
                             </h2>
                             <div class="value-btn">

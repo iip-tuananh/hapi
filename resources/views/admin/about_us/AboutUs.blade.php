@@ -9,6 +9,8 @@
             this.image_core_values = {};
             this.image_raw_material_area = {};
             this.home_image = {};
+            this.home_why_choose_image = {};
+            this.why_choose_criterias = [];
             this.galleries = [];
         }
         after(form) {
@@ -31,6 +33,16 @@
         }
         clearHomeImage() {
             if (this.home_image) this.home_image.clear();
+        }
+
+        get home_why_choose_image() {
+            return this._home_why_choose_image;
+        }
+        set home_why_choose_image(value) {
+            this._home_why_choose_image = new Image(value, this);
+        }
+        clearHomeWhyChooseImage() {
+            if (this.home_why_choose_image) this.home_why_choose_image.clear();
         }
 
         get image_mission() {
@@ -94,6 +106,25 @@
             this._galleries.splice(index, 1);
         }
 
+        get why_choose_criterias() {
+            return this._why_choose_criterias || [];
+        }
+
+        set why_choose_criterias(value) {
+            this._why_choose_criterias = (value || []).map(val => new AboutUsGallery(val, this));
+        }
+
+        addWhyChooseCriteria(criteria) {
+            if (!this._why_choose_criterias) this._why_choose_criterias = [];
+            let new_gallery = new AboutUsGallery(criteria, this);
+            this._why_choose_criterias.push(new_gallery);
+            return new_gallery;
+        }
+
+        removeWhyChooseCriteria(index) {
+            this._why_choose_criterias.splice(index, 1);
+        }
+
         get submit_data() {
             let data = {
                 name: this.name,
@@ -107,6 +138,9 @@
                 content: this.content,
                 home_title: this.home_title,
                 home_description: this.home_description,
+                home_why_choose_title: this.home_why_choose_title,
+                home_why_choose_description: this.home_why_choose_description,
+                why_choose_criterias: this.why_choose_criterias.map(c => c.submit_data),
             }
             data = jsonToFormData(data);
             let image = this.image.submit_data;
@@ -114,6 +148,9 @@
 
             let home_image = this.home_image.submit_data;
             if (home_image) data.append('home_image', home_image);
+
+            let home_why_choose_image = this.home_why_choose_image.submit_data;
+            if (home_why_choose_image) data.append('home_why_choose_image', home_why_choose_image);
 
             let image_mission = this.image_mission.submit_data;
             if (image_mission) data.append('image_mission', image_mission);
@@ -132,6 +169,13 @@
                 let gallery = g.image.submit_data;
                 if (gallery) data.append(`galleries[${i}][image]`, gallery);
                 else data.append(`galleries[${i}][image_obj]`, g.id);
+            })
+
+            this.why_choose_criterias.forEach((c, i) => {
+                if (c.id) data.append(`why_choose_criterias[${i}][id]`, c.id);
+                let criteria = c.image.submit_data;
+                if (criteria) data.append(`why_choose_criterias[${i}][image]`, criteria);
+                else data.append(`why_choose_criterias[${i}][image_obj]`, c.id);
             })
 
             return data;

@@ -12,6 +12,7 @@ use stdClass;
 use Exception;
 use App\Model\Admin\AboutUs as ThisModel;
 use App\Helpers\FileHelper;
+use App\Model\Admin\AboutUsWhyChooseCriteria;
 
 class AboutUsController extends Controller
 {
@@ -67,7 +68,6 @@ class AboutUsController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $validate = Validator::make(
             $request->all(),
             [
@@ -75,6 +75,9 @@ class AboutUsController extends Controller
                 'home_title' => 'required',
                 'home_description' => 'required',
                 'home_image' => 'nullable|file|mimes:jpg,jpeg,png|max:10240',
+                'home_why_choose_image' => 'nullable|file|mimes:jpg,jpeg,png|max:10240',
+                'home_why_choose_title' => 'required',
+                'home_why_choose_description' => 'required',
                 'description' => 'required',
                 'content' => 'required',
                 'mission' => 'required',
@@ -87,7 +90,10 @@ class AboutUsController extends Controller
                 'image_raw_material_area' => 'nullable|file|mimes:jpg,jpeg,png|max:10240',
                 'galleries' => 'nullable|array',
                 'galleries.*.image' => 'nullable|file|mimes:jpg,jpeg,png|max:10240',
-                'galleries.*.content' => 'nullable',
+                'why_choose_criterias' => 'nullable|array',
+                'why_choose_criterias.*.image' => 'nullable|file|mimes:jpg,jpeg,png|max:10240',
+                'why_choose_criterias.*.content' => 'required',
+                'why_choose_criterias.*.title' => 'required',
             ]
         );
         $json = new stdClass();
@@ -112,6 +118,8 @@ class AboutUsController extends Controller
             $object->vision = $request->vision;
             $object->core_values = $request->core_values;
             $object->raw_material_area = $request->raw_material_area;
+            $object->home_why_choose_title = $request->home_why_choose_title;
+            $object->home_why_choose_description = $request->home_why_choose_description;
             $object->save();
 
             if ($request->home_image) {
@@ -121,6 +129,13 @@ class AboutUsController extends Controller
                 }
 
                 FileHelper::uploadFileToCloudflare($request->home_image, $object->id, ThisModel::class, 'home_image');
+            }
+
+            if ($request->home_why_choose_image) {
+                if ($object->home_why_choose_image) {
+                    FileHelper::deleteFileFromCloudflare($object->home_why_choose_image, $object->id, ThisModel::class, 'home_why_choose_image');
+                }
+                FileHelper::uploadFileToCloudflare($request->home_why_choose_image, $object->id, ThisModel::class, 'home_why_choose_image');
             }
 
             if ($request->image) {
@@ -161,7 +176,11 @@ class AboutUsController extends Controller
             }
 
             if ($request->galleries) {
-                $object->syncGalleries($request->galleries); 
+                $object->syncGalleries($request->galleries);
+            }
+
+            if ($request->why_choose_criterias) {
+                $object->syncWhyChooseCriteria($request->why_choose_criterias);
             }
 
             // DB::commit();
@@ -187,6 +206,9 @@ class AboutUsController extends Controller
             if (isset($object->home_image)) {
                 FileHelper::deleteFileFromCloudflare($object->home_image->id, $object->id, ThisModel::class, 'home_image');
             }
+            if (isset($object->home_why_choose_image)) {
+                FileHelper::deleteFileFromCloudflare($object->home_why_choose_image->id, $object->id, ThisModel::class, 'home_why_choose_image');
+            }
             if (isset($object->image)) {
                 FileHelper::deleteFileFromCloudflare($object->image->id, $object->id, ThisModel::class, 'image');
             }
@@ -210,6 +232,15 @@ class AboutUsController extends Controller
                         $gallery->image->removeFromDB();
                     }
                     $gallery->removeFromDB();
+                }
+            }
+            if (isset($object->why_choose_criterias)) {
+                foreach ($object->why_choose_criterias as $criteria) {
+                    if (isset($criteria->image)) {
+                        FileHelper::deleteFileFromCloudflare($criteria->image->id, $criteria->id, AboutUsWhyChooseCriteria::class, null);
+                        $criteria->image->removeFromDB();
+                    }
+                    $criteria->removeFromDB();
                 }
             }
             $object->delete();

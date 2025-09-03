@@ -15,6 +15,8 @@
 
         get submit_data() {
             return {
+                title: this.title,
+                content: this.content,
             }
         }
     }
